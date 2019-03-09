@@ -138,7 +138,7 @@ func parsePathPattern(tpl string) ([]string, string) {
 	return keys, pattern.String()
 }
 
-func main() {
+func test() {
 	// 1.  赋值操作
 	var user string = "abc"
 	fmt.Println("Hello World", user)

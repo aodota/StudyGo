@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-func main() {
+func signMain() {
 	const size = 300
 
 	pic := image.NewGray(image.Rect(0, 0, size, size))

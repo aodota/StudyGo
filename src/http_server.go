@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"httpserver"
 	"io"
 	"log"
 	"net/http"
@@ -35,12 +35,16 @@ func NewWorker(workPool chan chan Request) Worker {
 }
 
 func HelloServer(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("path", req.RequestURI)
-	io.WriteString(w, "Hello World!")
+	name := req.Form.Get("name")
+	io.WriteString(w, "Hello World!"+name)
 }
 
 func main() {
-	http.HandleFunc("/", HelloServer)
+
+	var servlet = &httpserver.Servlet{}
+	servlet.AddHandler("/helloworld/{name}", HelloServer)
+
+	http.Handle("/", servlet)
 	err := http.ListenAndServe(":12345", nil)
 	if err != nil {
 		log.Fatal("list error", err)
